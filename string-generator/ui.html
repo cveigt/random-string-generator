@@ -1,8 +1,21 @@
-<h2>Rectangle Creator</h2>
-<p>Count: <input id="count" value="5"></p>
-<button id="create">Create</button>
-<button id="cancel">Cancel</button>
+<h2>Random String Generator</h2>
+
+<div class="form">
+  <label for="data-type">Data type</label>
+  <select name="data-type" id="data-type">
+    <option value="api-key">API key</option>
+    <option value="api-key">Something ID</option>
+  </select>
+  <button id="generate-btn" type="button">Generate</button>
+</div>
+
 <script>
+  document.getElementById("generate-btn").onclick = () => {
+    console.log("Generating something...");
+  };
+</script>
+
+<!-- <script>
 
 document.getElementById('create').onclick = () => {
   const textbox = document.getElementById('count');
@@ -14,4 +27,4 @@ document.getElementById('cancel').onclick = () => {
   parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*')
 }
 
-</script>
+</script> -->
