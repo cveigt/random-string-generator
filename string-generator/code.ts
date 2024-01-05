@@ -9,8 +9,40 @@
 // This shows the HTML page in "ui.html".
 figma.showUI(__html__);
 
+////////////////////////////////////////////////////////////////
+// Random string with 32 characters
+
+function generateRandomString(length) {
+  const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-+=<>?';
+  let randomString = '';
+
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    randomString += characters.charAt(randomIndex);
+  }
+
+  // return randomString;
+  console.log(randomString);
+}
+
+// Usage:
+// const randomString = generateRandomString(32);
+// console.log(randomString);
+
+////////////////////////////////////////////////////////////////
+// Random string with ...
+
+
 figma.ui.onmessage = pluginMessage => {
   console.log(pluginMessage.dataType);
+
+  for (const node of figma.currentPage.selection) {
+    if (pluginMessage.dataType === "api-key") {
+      node.opacity *= 0.5
+      generateRandomString(32);
+      node.characters = "New Text"
+    }
+  }
   
   figma.closePlugin();
 }
