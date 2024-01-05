@@ -4,14 +4,17 @@
   <label for="data-type">Data type</label>
   <select name="data-type" id="data-type">
     <option value="api-key">API key</option>
-    <option value="api-key">Something ID</option>
+    <option value="id">String ID (SID)</option>
+    <option value="token">Auth token</option>
   </select>
   <button id="generate-btn" type="button">Generate</button>
 </div>
 
 <script>
   document.getElementById("generate-btn").onclick = () => {
-    console.log("Generating something...");
+    const dataType = document.getElementById("data-type").value;
+
+    parent.postMessage({pluginMessage: {dataType}}, '*');
   };
 </script>
 
