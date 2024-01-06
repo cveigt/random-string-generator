@@ -11,8 +11,7 @@ figma.showUI(__html__);
 
 figma.ui.resize(400, 400);
 
-////////////////////////////////////////////////////////////////
-// Random string with 32 characters
+// Random string - Generic
 
 let stringResult = "";
 
@@ -25,10 +24,10 @@ function generateGenericString(length) {
     genericString += characters.charAt(randomIndex);
   }
 
-  // return randomString;
-  // console.log(genericString);
   stringResult = genericString;
 }
+
+// Random string - Auth token
 
 function generateTokenString(length) {
   const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
@@ -42,6 +41,8 @@ function generateTokenString(length) {
   stringResult = tokenString;
 }
 
+// Random string - SID
+
 function generateSidString(length) {
   const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
   let sidString = '';
@@ -54,14 +55,6 @@ function generateSidString(length) {
   console.log(sidString);
   stringResult = sidString;
 }
-
-// Usage:
-// const randomString = generateRandomString(32);
-// console.log(randomString);
-
-////////////////////////////////////////////////////////////////
-// Random string with ...
-
 
 figma.ui.onmessage = async(pluginMessage) => {
 
@@ -85,30 +78,3 @@ figma.ui.onmessage = async(pluginMessage) => {
   
   figma.closePlugin();
 }
-
-// Calls to "parent.postMessage" from within the HTML page will trigger this
-// callback. The callback will be passed the "pluginMessage" property of the
-// posted message.
-
-/*
-figma.ui.onmessage = msg => {
-  // One way of distinguishing between different types of messages sent from
-  // your HTML page is to use an object with a "type" property like this.
-  if (msg.type === 'create-rectangles') {
-    const nodes: SceneNode[] = [];
-    for (let i = 0; i < msg.count; i++) {
-      const rect = figma.createRectangle();
-      rect.x = i * 150;
-      rect.fills = [{type: 'SOLID', color: {r: 1, g: 0.5, b: 0}}];
-      figma.currentPage.appendChild(rect);
-      nodes.push(rect);
-    }
-    figma.currentPage.selection = nodes;
-    figma.viewport.scrollAndZoomIntoView(nodes);
-  } 
-
-  // Make sure to close the plugin when you're done. Otherwise the plugin will
-  // keep running, which shows the cancel button at the bottom of the screen.
-  figma.closePlugin();
-};
- */

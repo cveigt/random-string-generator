@@ -27,7 +27,7 @@
   <label for="data-type">Data type</label>
   <select name="data-type" id="data-type">
     <option value="api-key">API key</option>
-    <option value="sid">String ID (SID)</option>
+    <option value="sid">SID (String ID)</option>
     <option value="token">Auth token</option>
   </select>
   
@@ -41,12 +41,6 @@
 </div>
 
 <script>
-  // function showPrefix(type) {
-  //   if (type == "sid") {
-  //     document.querySelector(".hidden").classList.remove("hidden");
-  //   }
-  // }
-
   document.getElementById("data-type").onchange = () => {
     const prefix = document.getElementById("data-type").value;
 
