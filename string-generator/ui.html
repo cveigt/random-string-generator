@@ -1,3 +1,26 @@
+<style>
+  body {
+    padding: 2em;
+    font-family: sans-serif;
+  }
+  input, select {
+    display: block;
+    margin-bottom: 1em;
+  }
+  label {
+    display: block;
+    margin-bottom: 0.4em;
+  }
+  button {
+    margin-top: 1.5em;
+    width: 100%;
+    height: 2em;
+  }
+  .hidden {
+    display: none;
+  }
+</style>
+
 <h2>Random String Generator</h2>
 
 <div class="form">
@@ -11,13 +34,31 @@
   <label for="char-length">Length</label>
   <input type="number" id="char-length" value="16" name="char-length" min="1" max="100" />
 
-  <label for="prefix">Prefix</label>
-  <input type="text" id="prefix" name="prefix" placeholder="e.g. AC">
+  <label class="hidden" id="prefix-label" for="prefix">Prefix</label>
+  <input class="hidden" type="text" id="prefix" name="prefix" placeholder="e.g. AC">
   
   <button id="generate-btn" type="button">Generate</button>
 </div>
 
 <script>
+  // function showPrefix(type) {
+  //   if (type == "sid") {
+  //     document.querySelector(".hidden").classList.remove("hidden");
+  //   }
+  // }
+
+  document.getElementById("data-type").onchange = () => {
+    const prefix = document.getElementById("data-type").value;
+
+    if (prefix == "sid") {
+      document.getElementById("prefix").classList.remove("hidden");
+      document.getElementById("prefix-label").classList.remove("hidden");
+    } else {
+      document.getElementById("prefix").classList.add("hidden");
+      document.getElementById("prefix-label").classList.add("hidden");
+    }
+  }
+
   document.getElementById("generate-btn").onclick = () => {
     const dataType = document.getElementById("data-type").value;
     const charLength = document.getElementById("char-length").value;

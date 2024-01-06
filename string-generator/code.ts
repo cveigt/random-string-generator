@@ -9,6 +9,8 @@
 // This shows the HTML page in "ui.html".
 figma.showUI(__html__);
 
+figma.ui.resize(400, 400);
+
 ////////////////////////////////////////////////////////////////
 // Random string with 32 characters
 
