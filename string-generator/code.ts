@@ -12,17 +12,20 @@ figma.showUI(__html__);
 ////////////////////////////////////////////////////////////////
 // Random string with 32 characters
 
-function generateRandomString(length) {
+let stringResult = "";
+
+function generateGenericString(length) {
   const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-+=<>?';
-  let randomString = '';
+  let genericString = '';
 
   for (let i = 0; i < length; i++) {
     const randomIndex = Math.floor(Math.random() * characters.length);
-    randomString += characters.charAt(randomIndex);
+    genericString += characters.charAt(randomIndex);
   }
 
   // return randomString;
-  console.log(randomString);
+  console.log(genericString);
+  stringResult = genericString;
 }
 
 // Usage:
@@ -33,14 +36,15 @@ function generateRandomString(length) {
 // Random string with ...
 
 
-figma.ui.onmessage = pluginMessage => {
-  console.log(pluginMessage.dataType);
+figma.ui.onmessage = async(pluginMessage) => {
+
+  await figma.loadFontAsync({family: "Inter", style: "Black"});
 
   for (const node of figma.currentPage.selection) {
     if (pluginMessage.dataType === "api-key") {
-      node.opacity *= 0.5
-      generateRandomString(32);
-      node.characters = "New Text"
+      // node.opacity *= 0.5
+      generateGenericString(pluginMessage.charLength);
+      node.characters = stringResult;
     }
   }
   

@@ -7,14 +7,19 @@
     <option value="id">String ID (SID)</option>
     <option value="token">Auth token</option>
   </select>
+  
+  <label for="char-length">Length</label>
+  <input type="number" id="char-length" value="16" name="char-length" min="1" max="100" />
+  
   <button id="generate-btn" type="button">Generate</button>
 </div>
 
 <script>
   document.getElementById("generate-btn").onclick = () => {
     const dataType = document.getElementById("data-type").value;
+    const charLength = document.getElementById("char-length").value;
 
-    parent.postMessage({pluginMessage: {dataType}}, '*');
+    parent.postMessage({pluginMessage: {dataType, charLength}}, '*');
   };
 </script>
 
