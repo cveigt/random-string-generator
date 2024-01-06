@@ -11,12 +11,12 @@ figma.showUI(__html__);
 
 figma.ui.resize(400, 400);
 
-// Random string - Generic
-
 let stringResult = "";
 
-function generateGenericString(length) {
-  const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-+=<>?';
+// Random string - API key
+
+function generateApiKeyString(length) {
+  const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-';
   let genericString = '';
 
   for (let i = 0; i < length; i++) {
@@ -56,6 +56,20 @@ function generateSidString(length) {
   stringResult = sidString;
 }
 
+// Random string - Generic
+
+function generateGenericString(length) {
+  const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-+=<>?';
+  let genericString = '';
+
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    genericString += characters.charAt(randomIndex);
+  }
+
+  stringResult = genericString;
+}
+
 figma.ui.onmessage = async(pluginMessage) => {
 
   await figma.loadFontAsync({family: "Inter", style: "Black"});
@@ -63,7 +77,7 @@ figma.ui.onmessage = async(pluginMessage) => {
   for (const node of figma.currentPage.selection) {
     if (pluginMessage.dataType === "api-key") {
       // node.opacity *= 0.5
-      generateGenericString(pluginMessage.charLength);
+      generateApiKeyString(pluginMessage.charLength);
       node.characters = stringResult;
 
     } else if (pluginMessage.dataType === "token") {
@@ -73,7 +87,11 @@ figma.ui.onmessage = async(pluginMessage) => {
     } else if (pluginMessage.dataType === "sid") {
       generateSidString(pluginMessage.charLength);
       node.characters = `${pluginMessage.prefix}${stringResult}`;
-    }
+      
+    } else if (pluginMessage.dataType === "generic") {
+      generateGenericString(pluginMessage.charLength);
+      node.characters = `${pluginMessage.prefix}${stringResult}`;
+    } 
   }
   
   figma.closePlugin();
