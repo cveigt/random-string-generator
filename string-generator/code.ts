@@ -24,22 +24,33 @@ function generateGenericString(length) {
   }
 
   // return randomString;
-  console.log(genericString);
+  // console.log(genericString);
   stringResult = genericString;
 }
 
 function generateTokenString(length) {
   const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
-  let genericString = '';
+  let tokenString = '';
 
   for (let i = 0; i < length; i++) {
     const randomIndex = Math.floor(Math.random() * characters.length);
-    genericString += characters.charAt(randomIndex);
+    tokenString += characters.charAt(randomIndex);
   }
 
-  // return randomString;
-  console.log(genericString);
-  stringResult = genericString;
+  stringResult = tokenString;
+}
+
+function generateSidString(length) {
+  const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+  let sidString = '';
+
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    sidString += characters.charAt(randomIndex);
+  }
+
+  console.log(sidString);
+  stringResult = sidString;
 }
 
 // Usage:
@@ -63,6 +74,10 @@ figma.ui.onmessage = async(pluginMessage) => {
     } else if (pluginMessage.dataType === "token") {
       generateTokenString(pluginMessage.charLength);
       node.characters = stringResult;
+
+    } else if (pluginMessage.dataType === "sid") {
+      generateSidString(pluginMessage.charLength);
+      node.characters = `${pluginMessage.prefix}${stringResult}`;
     }
   }
   
