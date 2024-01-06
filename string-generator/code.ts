@@ -28,6 +28,20 @@ function generateGenericString(length) {
   stringResult = genericString;
 }
 
+function generateTokenString(length) {
+  const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+  let genericString = '';
+
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    genericString += characters.charAt(randomIndex);
+  }
+
+  // return randomString;
+  console.log(genericString);
+  stringResult = genericString;
+}
+
 // Usage:
 // const randomString = generateRandomString(32);
 // console.log(randomString);
@@ -44,6 +58,10 @@ figma.ui.onmessage = async(pluginMessage) => {
     if (pluginMessage.dataType === "api-key") {
       // node.opacity *= 0.5
       generateGenericString(pluginMessage.charLength);
+      node.characters = stringResult;
+
+    } else if (pluginMessage.dataType === "token") {
+      generateTokenString(pluginMessage.charLength);
       node.characters = stringResult;
     }
   }
