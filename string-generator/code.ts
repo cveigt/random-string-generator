@@ -90,20 +90,3 @@ figma.ui.onmessage = async(pluginMessage) => {
   
   figma.closePlugin();
 }
-
-
-// async function loadFontsForSelectedNodes() {
-//   // Check if there are selected nodes
-//   if (figma.currentPage.selection.length > 0) {
-//     // Iterate through all selected nodes
-//     for (const selectedNode of figma.currentPage.selection) {
-//       // Load the font asynchronously for each selected node
-//       await figma.loadFontAsync(selectedNode.fontName);
-//     }
-//   } else {
-//     console.log("No text nodes are currently selected.");
-//   }
-// }
-
-// // Call the function
-// loadFontsForSelectedNodes();
