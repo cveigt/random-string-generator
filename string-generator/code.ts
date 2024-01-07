@@ -7,7 +7,7 @@
 // This shows the HTML page in "ui.html".
 figma.showUI(__html__);
 
-figma.ui.resize(400, 400);
+figma.ui.resize(400, 420);
 
 let stringResult = "";
 
