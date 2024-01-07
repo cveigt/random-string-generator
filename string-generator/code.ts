@@ -1,10 +1,8 @@
-// This plugin will open a window to prompt the user to enter a number, and
-// it will then create that many rectangles on the screen.
+// This plugin will generate random string values for each node selected in a Figma file.
 
-// This file holds the main code for plugins. Code in this file has access to
+// This file holds the main code/logic for the plugin. Code in this file has access to
 // the *figma document* via the figma global object.
-// You can access browser APIs in the <script> tag inside "ui.html" which has a
-// full browser environment (See https://www.figma.com/plugin-docs/how-plugins-run).
+
 
 // This shows the HTML page in "ui.html".
 figma.showUI(__html__);
@@ -14,7 +12,6 @@ figma.ui.resize(400, 400);
 let stringResult = "";
 
 // Random string - API key
-
 function generateApiKeyString(length) {
   const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-';
   let genericString = '';
@@ -28,7 +25,6 @@ function generateApiKeyString(length) {
 }
 
 // Random string - Auth token
-
 function generateTokenString(length) {
   const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
   let tokenString = '';
@@ -42,7 +38,6 @@ function generateTokenString(length) {
 }
 
 // Random string - SID
-
 function generateSidString(length) {
   const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
   let sidString = '';
@@ -57,7 +52,6 @@ function generateSidString(length) {
 }
 
 // Random string - Generic
-
 function generateGenericString(length) {
   const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-+=<>?';
   let genericString = '';
@@ -72,7 +66,7 @@ function generateGenericString(length) {
 
 figma.ui.onmessage = async(pluginMessage) => {
 
-  await figma.loadFontAsync({family: "Inter", style: "Black"});
+  await figma.loadFontAsync(figma.currentPage.selection[0].fontName);
 
   for (const node of figma.currentPage.selection) {
     if (pluginMessage.dataType === "api-key") {
@@ -96,3 +90,20 @@ figma.ui.onmessage = async(pluginMessage) => {
   
   figma.closePlugin();
 }
+
+
+// async function loadFontsForSelectedNodes() {
+//   // Check if there are selected nodes
+//   if (figma.currentPage.selection.length > 0) {
+//     // Iterate through all selected nodes
+//     for (const selectedNode of figma.currentPage.selection) {
+//       // Load the font asynchronously for each selected node
+//       await figma.loadFontAsync(selectedNode.fontName);
+//     }
+//   } else {
+//     console.log("No text nodes are currently selected.");
+//   }
+// }
+
+// // Call the function
+// loadFontsForSelectedNodes();
